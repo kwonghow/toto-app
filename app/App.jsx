@@ -13,14 +13,17 @@ class App extends Component {
     this.handleSubmit = this.handleSubmit.bind(this);
 
     this.state = {
-      amountSpent: 0,
-      step: 1,
-      results: getRandomIntSet(6, 1, 49)
+      amountSpent: 0
     };
   }
 
   handleSubmit() {
+    const results = getRandomIntSet(6, 1, 49);
 
+    this.setState({
+      amountSpent: this.state.amountSpent + 7,
+      results
+    });
   }
 
   render() {
@@ -29,7 +32,7 @@ class App extends Component {
     return (
       <div className="container text-center">
         <AmountSpent amountSpent={amountSpent} />
-        <Better onSubmit={this.handleSubmit()} />
+        <Better onSubmit={this.handleSubmit} />
         <Results results={results} />
       </div>
     );

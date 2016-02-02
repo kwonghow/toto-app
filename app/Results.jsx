@@ -5,7 +5,7 @@ class Results extends Component {
     const { results } = this.props;
 
     return (
-      <p>{results.join(', ')}</p>
+      <p>{results ? results.join(', ') : ''}</p>
     );
   }
 }

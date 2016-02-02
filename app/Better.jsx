@@ -7,6 +7,7 @@ class Better extends Component {
     super(props);
 
     this.handleChange = this.handleChange.bind(this);
+    this.handleDraw = this.handleDraw.bind(this);
     this.handleQuickPick = this.handleQuickPick.bind(this);
 
     this.state = {
@@ -25,6 +26,14 @@ class Better extends Component {
     this.setState({ [name]: value});
   }
 
+  handleDraw(e) {
+    e.preventDefault();
+
+    if (this.props.onSubmit) {
+      this.props.onSubmit();
+    }
+  }
+
   handleQuickPick(e) {
     e.preventDefault();
 
@@ -41,6 +50,7 @@ class Better extends Component {
 
   render() {
     const { number1, number2, number3, number4, number5, number6, number7 } = this.state;
+
     return (
       <form className="form-inline better text-center">
         <div className="form-group">
@@ -69,7 +79,7 @@ class Better extends Component {
             <button className="btn btn-default btn-block" onClick={this.handleQuickPick}>Quick Pick</button>
           </div>
           <div className="col-sm-2">
-            <button className="btn btn-primary btn-block">Draw</button>
+            <button className="btn btn-primary btn-block" onClick={this.handleDraw}>Draw</button>
           </div>
         </div>
       </form>
