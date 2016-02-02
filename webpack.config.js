@@ -4,6 +4,8 @@ var path = require('path');
 var webpack = require('webpack');
 var HtmlWebpackPlugin = require('html-webpack-plugin');
 
+var srcPath = path.resolve(__dirname, 'app');
+
 module.exports = {
   devtool: 'eval-source-map',
   entry: [
@@ -74,5 +76,10 @@ module.exports = {
         path.resolve(__dirname, '../')
       ]
     }
+  },
+  resolve: {
+    // Resolve .js and .jsx files!
+    extensions: ['', '.js', '.jsx'],
+    root: srcPath
   }
 };
