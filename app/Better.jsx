@@ -14,29 +14,33 @@ class Better extends Component {
     this.handleDraw = this.handleDraw.bind(this);
     this.handleQuickPick = this.handleQuickPick.bind(this);
 
-    this.state = {
-      number1: '',
-      number2: '',
-      number3: '',
-      number4: '',
-      number5: '',
-      number6: '',
-      number7: ''
-    };
+    const initialState = [];
+
+    for (let i = 0; i < 7; i++) {
+      initialState[i] = '';
+    }
+
+    this.state = { chosenNumbers: initialState };
   }
 
   handleChange(event) {
+    const { chosenNumbers } = this.state;
     const { name, value } = event.target;
-    this.setState({ [name]: value});
+
+    chosenNumbers[name] = Number(value);
+
+    this.setState({ chosenNumbers });
   }
 
   handleDraw(e) {
     e.preventDefault();
 
-    const { number1, number2, number3, number4, number5, number6, number7 } = this.state;
+    const { chosenNumbers } = this.state;
 
-    if (!number1 || !number2 || !number3 || !number4 || !number5 || !number6 || !number7 ) {
-      return false;
+    for (let i = 0; i < 7; i++) {
+      if (Number(chosenNumbers[i]) === 0) {
+        return false;
+      }
     }
 
     if (this.props.onSubmit) {
@@ -47,42 +51,36 @@ class Better extends Component {
   handleQuickPick(e) {
     e.preventDefault();
 
-    const newState = {};
     const result = getRandomIntSet(7, 1, 49);
 
-    for (const key in result) {
-      const objectKey = 'number' + (Number(key) + 1);
-      newState[objectKey] = result[key];
-    }
-
-    this.setState({...newState});
+    this.setState({ chosenNumbers: result});
   }
 
   render() {
-    const { number1, number2, number3, number4, number5, number6, number7 } = this.state;
+    const { chosenNumbers } = this.state;
 
     return (
       <form className="form-inline better text-center">
         <div className="form-group">
-          <input className="form-control" name="number1" size="2" type="text" value={number1} onChange={this.handleChange} />
+          <input className="form-control" name="0" size="2" type="text" value={chosenNumbers[0]} onChange={this.handleChange} />
         </div>
         <div className="form-group">
-          <input className="form-control" name="number2" size="2" type="text" value={number2} onChange={this.handleChange} />
+          <input className="form-control" name="1" size="2" type="text" value={chosenNumbers[1]} onChange={this.handleChange} />
         </div>
         <div className="form-group">
-          <input className="form-control" name="number3" size="2" type="text" value={number3} onChange={this.handleChange} />
+          <input className="form-control" name="2" size="2" type="text" value={chosenNumbers[2]} onChange={this.handleChange} />
         </div>
         <div className="form-group">
-          <input className="form-control" name="number4" size="2" type="text" value={number4} onChange={this.handleChange} />
+          <input className="form-control" name="3" size="2" type="text" value={chosenNumbers[3]} onChange={this.handleChange} />
         </div>
         <div className="form-group">
-          <input className="form-control" name="number5" size="2" type="text" value={number5} onChange={this.handleChange} />
+          <input className="form-control" name="4" size="2" type="text" value={chosenNumbers[4]} onChange={this.handleChange} />
         </div>
         <div className="form-group">
-          <input className="form-control" name="number6" size="2" type="text" value={number6} onChange={this.handleChange} />
+          <input className="form-control" name="5" size="2" type="text" value={chosenNumbers[5]} onChange={this.handleChange} />
         </div>
         <div className="form-group">
-          <input className="form-control" name="number7" size="2" type="text" value={number7} onChange={this.handleChange} />
+          <input className="form-control" name="6" size="2" type="text" value={chosenNumbers[6]} onChange={this.handleChange} />
         </div>
         <div className="better__buttons row">
           <div className="col-sm-2 col-sm-offset-4">
