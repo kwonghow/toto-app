@@ -1,0 +1,11 @@
+.better {
+  .form-group {
+    &:not(:last-child) {
+      margin-right: 1%;
+    }
+  }
+
+  &__buttons {
+    margin-top: 1vh;
+  }
+}
