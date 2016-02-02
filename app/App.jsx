@@ -13,6 +13,7 @@ class App extends Component {
     this.handleSubmit = this.handleSubmit.bind(this);
 
     this.state = {
+      amountEarned: 0,
       amountSpent: 0
     };
   }
@@ -27,11 +28,11 @@ class App extends Component {
   }
 
   render() {
-    const { amountSpent, results } = this.state;
+    const { amountEarned, amountSpent, results } = this.state;
 
     return (
       <div className="container text-center">
-        <AmountSpent amountSpent={amountSpent} />
+        <AmountSpent amountEarned={amountEarned} amountSpent={amountSpent} />
         <Better onSubmit={this.handleSubmit} />
         <Results results={results} />
       </div>
