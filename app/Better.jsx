@@ -33,6 +33,12 @@ class Better extends Component {
   handleDraw(e) {
     e.preventDefault();
 
+    const { number1, number2, number3, number4, number5, number6, number7 } = this.state;
+
+    if (!number1 || !number2 || !number3 || !number4 || !number5 || !number6 || !number7 ) {
+      return false;
+    }
+
     if (this.props.onSubmit) {
       this.props.onSubmit();
     }
