@@ -44,7 +44,7 @@ class Better extends Component {
     }
 
     if (this.props.onSubmit) {
-      this.props.onSubmit();
+      this.props.onSubmit(chosenNumbers);
     }
   }
 
