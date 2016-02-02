@@ -1,6 +1,11 @@
 import React, { Component, PropTypes } from 'react';
 
 class AmountSpent extends Component {
+  static propTypes = {
+    amountEarned: PropTypes.number,
+    amountSpent: PropTypes.number
+  };
+
   render() {
     const { amountEarned, amountSpent } = this.props;
 

@@ -3,6 +3,10 @@ import React, { Component, PropTypes } from 'react';
 import { getRandomIntSet } from 'helpers/NumberHelper';
 
 class Better extends Component {
+  static propTypes = {
+    onSubmit: PropTypes.func
+  };
+
   constructor(props) {
     super(props);
 

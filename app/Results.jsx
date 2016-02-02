@@ -1,6 +1,10 @@
 import React, { Component, PropTypes } from 'react';
 
 class Results extends Component {
+  static propTypes = {
+    results: PropTypes.array
+  };
+
   render() {
     const { results } = this.props;
 
