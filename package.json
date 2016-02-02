@@ -1,22 +1,22 @@
 {
-  "name": "webpack-express-boilerplate",
+  "name": "toto-app",
   "version": "0.1.0",
-  "description": "A boilerplate for running a Webpack workflow in Node express",
+  "description": "An app that simulates the Singapore TOTO lottery game.",
   "main": "server.js",
   "repository": {
     "type": "git",
-    "url": "https://github.com/christianalfoni/webpack-express-boilerplate.git"
+    "url": "https://kwonghow@bitbucket.org/kwonghow/toto-app.git"
   },
   "keywords": [
+    "babel",
     "express",
-    "webpack",
-    "node"
+    "node",
+    "react",
+    "toto",
+    "webpack"
   ],
-  "author": "Christian Alfoni",
-  "license": "MIT",
-  "bugs": {
-    "url": "https://github.com/christianalfoni/webpack-express-boilerplate/issues"
-  },
+  "author": "Ong Kwong How",
+  "license": "UNLICENSED",
   "homepage": "https://github.com/christianalfoni/webpack-express-boilerplate",
   "scripts": {
     "test": "",
@@ -27,8 +27,17 @@
   },
   "dependencies": {
     "babel-cli": "^6.4.0",
+    "bootstrap-loader": "^1.0.7",
+    "bootstrap-sass": "^3.3.6",
+    "css-loader": "^0.19.0",
+    "file-loader": "^0.8.5",
+    "node-sass": "^3.4.2",
     "react": "^0.14.3",
-    "react-dom": "^0.14.3"
+    "react-dom": "^0.14.3",
+    "resolve-url-loader": "^1.4.3",
+    "sass-loader": "^3.1.2",
+    "style-loader": "^0.12.4",
+    "url-loader": "^0.5.7"
   },
   "devDependencies": {
     "autoprefixer": "^6.0.3",
