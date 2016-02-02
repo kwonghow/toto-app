@@ -1,0 +1,37 @@
+---
+# Output debugging info
+loglevel: debug
+
+# Major version of Bootstrap: 3 or 4
+bootstrapVersion: 3
+
+# Webpack loaders, order matters
+styleLoaders:
+  - style
+  - css
+  - autoprefixer
+  - sass
+
+# Extract styles to stand-alone css file
+# Different settings for different environments can be used,
+# It depends on value of NODE_ENV environment variable
+# This param can also be set in webpack config:
+#   entry: 'bootstrap-loader/extractStyles'
+extractStyles: false
+
+# Customize Bootstrap variables that get imported before the original Bootstrap variables.
+# Thus original Bootstrap variables can depend on values from here.
+# preBootstrapCustomizations: ./scss/_override.scss
+
+# This gets loaded after bootstrap/variables is loaded
+# So you can refer to bootstrap variables
+# bootstrapCustomizations: ./scss/main.scss
+
+# With CSS Modules we load all application styles directly in React components
+appStyles: ./scss/main.scss
+
+### Bootstrap styles
+styles: true
+
+### Bootstrap scripts
+scripts: true
