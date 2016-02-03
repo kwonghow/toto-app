@@ -37,10 +37,14 @@ module.exports = {
     })
   ],
   module: {
-    loaders: [{
-      test: /\.js?$/,
-      exclude: /node_modules/,
-      loader: 'babel'
+    loaders: [      // Transpile other JS/JSX files back to ES5
+    {
+      test: /\.jsx?$/,
+      exclude: /(node_modules|bower_components|__tests__)/,
+      loader: 'babel',
+      query: {
+        cacheDirectory: true
+      }
     }, {
       test: /\.json?$/,
       loader: 'json'
