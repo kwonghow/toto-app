@@ -2,6 +2,11 @@ import React, { Component, PropTypes } from 'react';
 
 import { getRandomIntSet } from 'helpers/NumberHelper';
 
+/**
+ * Returns a string of the current date time.
+ *
+ * @return {String}
+ */
 function getDateTime() {
   const now   = new Date();
   const year  = now.getFullYear().toString().substr(2, 2);
@@ -98,8 +103,6 @@ class Better extends Component {
 
   render() {
     const { chosenNumbers } = this.state;
-
-    const currentDate = new Date();
 
     return (
       <form className="form-inline better">
