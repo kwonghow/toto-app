@@ -120,9 +120,8 @@ class App extends Component {
 
     return (
       <div className="container text-center">
-        <h1>Toto App</h1>
-        <AmountSpent amountEarned={amountEarned} amountSpent={amountSpent} />
         <Better onSubmit={this.handleSubmit} />
+        <AmountSpent amountEarned={amountEarned} amountSpent={amountSpent} />
         <Results
           additionalNumber={additionalNumber}
           chosenNumbers={chosenNumbers}

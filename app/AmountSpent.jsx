@@ -24,8 +24,10 @@ class AmountSpent extends Component {
 
     return (
       <div>
-        <p>Total amount spent: ${amountSpent}</p>
-        <p>Total amount earned: ${amountEarned}</p>
+        <p>
+          Total amount spent: ${amountSpent}<br />
+          Total amount earned: ${amountEarned}
+        </p>
         <p>Balance: {this.renderBalance()}</p>
       </div>
     );

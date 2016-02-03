@@ -2,6 +2,40 @@ import React, { Component, PropTypes } from 'react';
 
 import { getRandomIntSet } from 'helpers/NumberHelper';
 
+function getDateTime() {
+  const now   = new Date();
+  const year  = now.getFullYear().toString().substr(2, 2);
+  let month   = now.getMonth()+1;
+  let day     = now.getDate();
+  let hour    = now.getHours();
+  let minute  = now.getMinutes();
+  let second  = now.getSeconds();
+
+  const amPm = hour >= 12 ? 'pm' : 'am';
+
+  if (hour >= 12) {
+    hour -= 12;
+  }
+
+  if (month.toString().length === 1) {
+    month = '0'+month;
+  }
+  if (day.toString().length === 1) {
+    day = '0'+day;
+  }
+  if (hour.toString().length === 1) {
+    hour = '0'+hour;
+  }
+  if (minute.toString().length === 1) {
+    minute = '0'+minute;
+  }
+  if (second.toString().length === 1) {
+    second = '0'+second;
+  }
+
+  return `${day}/${month}/${year} ${hour}:${minute}${amPm}`;
+}
+
 class Better extends Component {
   static propTypes = {
     onSubmit: PropTypes.func
@@ -65,28 +99,114 @@ class Better extends Component {
   render() {
     const { chosenNumbers } = this.state;
 
+    const currentDate = new Date();
+
     return (
-      <form className="form-inline better text-center">
-        <div className="form-group">
-          <input className="form-control" name="0" size="2" type="text" value={chosenNumbers[0]} onChange={this.handleChange} />
-        </div>
-        <div className="form-group">
-          <input className="form-control" name="1" size="2" type="text" value={chosenNumbers[1]} onChange={this.handleChange} />
-        </div>
-        <div className="form-group">
-          <input className="form-control" name="2" size="2" type="text" value={chosenNumbers[2]} onChange={this.handleChange} />
-        </div>
-        <div className="form-group">
-          <input className="form-control" name="3" size="2" type="text" value={chosenNumbers[3]} onChange={this.handleChange} />
-        </div>
-        <div className="form-group">
-          <input className="form-control" name="4" size="2" type="text" value={chosenNumbers[4]} onChange={this.handleChange} />
-        </div>
-        <div className="form-group">
-          <input className="form-control" name="5" size="2" type="text" value={chosenNumbers[5]} onChange={this.handleChange} />
-        </div>
-        <div className="form-group">
-          <input className="form-control" name="6" size="2" type="text" value={chosenNumbers[6]} onChange={this.handleChange} />
+      <form className="form-inline better">
+        <div className="row">
+          <article className="col-sm-offset-3 col-sm-6 ticket">
+            <h2 className="ticket__bet-type">System 7</h2>
+            <div className="form-group">
+              <input className="form-control" name="0" size="1" type="text" value={chosenNumbers[0]} onChange={this.handleChange} />
+            </div>
+            <div className="form-group">
+              <input className="form-control" name="1" size="1" type="text" value={chosenNumbers[1]} onChange={this.handleChange} />
+            </div>
+            <div className="form-group">
+              <input className="form-control" name="2" size="1" type="text" value={chosenNumbers[2]} onChange={this.handleChange} />
+            </div>
+            <div className="form-group">
+              <input className="form-control" name="3" size="1" type="text" value={chosenNumbers[3]} onChange={this.handleChange} />
+            </div>
+            <div className="form-group">
+              <input className="form-control" name="4" size="1" type="text" value={chosenNumbers[4]} onChange={this.handleChange} />
+            </div>
+            <div className="form-group">
+              <input className="form-control" name="5" size="1" type="text" value={chosenNumbers[5]} onChange={this.handleChange} />
+            </div>
+            <div className="form-group">
+              <input className="form-control" name="6" size="1" type="text" value={chosenNumbers[6]} onChange={this.handleChange} />
+            </div>
+            <aside className="ticket__meta">
+              <p className="ticket__price">Price:$7.00</p>
+              <div className="row">
+                <div className="col-xs-7">
+                  Draw: Fri 19/02/16<br />
+                  &nbsp;<br />
+                  {getDateTime()}<br />
+                  209-18659073-234408
+                </div>
+                <div className="col-xs-5 text-right">
+                  0002/14<br />
+                  &nbsp;<br />
+                  00888802-01<br />
+                  02-2624
+                </div>
+              </div>
+            </aside>
+            <barcode className="upc-a">
+              <upc-reset></upc-reset>
+              <upc-digit data-val="0"></upc-digit>
+              <upc-digit data-val="2"></upc-digit>
+              <upc-digit data-val="2"></upc-digit>
+              <upc-digit data-val="0"></upc-digit>
+              <upc-digit data-val="0"></upc-digit>
+              <upc-digit data-val="0"></upc-digit>
+              <upc-reset></upc-reset>
+              <upc-digit data-val="1"></upc-digit>
+              <upc-digit data-val="2"></upc-digit>
+              <upc-digit data-val="5"></upc-digit>
+              <upc-digit data-val="0"></upc-digit>
+              <upc-digit data-val="3"></upc-digit>
+              <upc-digit data-val="3"></upc-digit>
+              <upc-reset></upc-reset>
+              <upc-digit data-val="0"></upc-digit>
+              <upc-digit data-val="2"></upc-digit>
+              <upc-digit data-val="2"></upc-digit>
+              <upc-digit data-val="0"></upc-digit>
+              <upc-digit data-val="0"></upc-digit>
+              <upc-digit data-val="0"></upc-digit>
+              <upc-reset></upc-reset>
+              <upc-digit data-val="1"></upc-digit>
+              <upc-digit data-val="2"></upc-digit>
+              <upc-digit data-val="5"></upc-digit>
+              <upc-digit data-val="0"></upc-digit>
+              <upc-digit data-val="3"></upc-digit>
+              <upc-digit data-val="3"></upc-digit>
+              <upc-reset></upc-reset>
+              <upc-digit data-val="0"></upc-digit>
+              <upc-digit data-val="2"></upc-digit>
+              <upc-digit data-val="2"></upc-digit>
+              <upc-digit data-val="0"></upc-digit>
+              <upc-digit data-val="0"></upc-digit>
+              <upc-digit data-val="0"></upc-digit>
+              <upc-reset></upc-reset>
+              <upc-digit data-val="1"></upc-digit>
+              <upc-digit data-val="2"></upc-digit>
+              <upc-digit data-val="5"></upc-digit>
+              <upc-digit data-val="0"></upc-digit>
+              <upc-digit data-val="3"></upc-digit>
+              <upc-digit data-val="3"></upc-digit>
+              <upc-reset></upc-reset>
+              <upc-digit data-val="0"></upc-digit>
+              <upc-digit data-val="2"></upc-digit>
+              <upc-digit data-val="2"></upc-digit>
+              <upc-digit data-val="0"></upc-digit>
+              <upc-digit data-val="0"></upc-digit>
+              <upc-digit data-val="0"></upc-digit>
+              <upc-reset></upc-reset>
+              <upc-digit data-val="1"></upc-digit>
+              <upc-digit data-val="2"></upc-digit>
+              <upc-digit data-val="5"></upc-digit>
+              <upc-digit data-val="0"></upc-digit>
+              <upc-digit data-val="3"></upc-digit>
+              <upc-digit data-val="3"></upc-digit>
+              <upc-reset></upc-reset>
+              <upc-digit data-val="0"></upc-digit>
+              <upc-digit data-val="2"></upc-digit>
+              <upc-reset></upc-reset>
+            </barcode>
+          </article>
         </div>
         <div className="better__buttons row">
           <div className="col-sm-2 col-sm-offset-4">

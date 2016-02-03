@@ -1,0 +1,38 @@
+.results {
+  margin-top: 3vh;
+
+  &__table {
+    thead tr {
+      background: #777;
+      color: #fff;
+
+      th {
+        text-align: center;
+      }
+    }
+
+    tbody td {
+      background: #f4f4f4;
+      border: 1px solid #e7e7e7;
+      box-sizing: border-box;
+
+      &.chosen {
+        background: #007f00;
+        color: #fff;
+        font-weight: 600;
+      }
+    }
+
+    &--winning-numbers {
+      tbody td {
+        width: 16.7%;
+      }
+    }
+
+    &--additional-number {
+      tbody td {
+        width: 100%;
+      }
+    }
+  }
+}

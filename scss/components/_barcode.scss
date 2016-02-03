@@ -1,0 +1,108 @@
+$height: 45px;
+$width: 1.6 * $height;
+
+$upc_patterns: (
+  (3,5,6), (2,4,6),
+  (2,3,5), (1,5,6),
+  (1,2,5), (1,3,6),
+  (1,2,3), (1,4,5),
+  (1,3,4), (3,4,5)
+);
+
+@mixin upc-pattern($val, $side) {
+  $pattern_vals: nth($upc_patterns, $val+1);
+  $colors: (#fff, #000);
+  @if($side == 2) {
+    $colors: (#000, #fff);
+  }
+  background: linear-gradient(
+    to right,
+    nth($colors,1) 0%,
+    nth($colors,1) nth($pattern_vals,1) * 14.2857%,
+    nth($colors,2) nth($pattern_vals,1) * 14.2857%,
+    nth($colors,2) nth($pattern_vals,2) * 14.2857%,
+    nth($colors,1) nth($pattern_vals,2) * 14.2857%,
+    nth($colors,1) nth($pattern_vals,3) * 14.2857%,
+    nth($colors,2) nth($pattern_vals,3) * 14.2857%,
+    nth($colors,2) 100%
+  );
+}
+
+barcode.upc-a {
+  display: block;
+  height: $height;
+  background: #fff;
+  border: 0.1 * $width solid #fff;
+  font-size: 0;
+}
+
+barcode.upc-a * {
+  position: relative;
+  display: inline-block;
+  margin: 0;
+}
+
+barcode.upc-a upc-reset {
+  width: (5/95) * $width;
+  height: 100%;
+  background: linear-gradient(
+    to right,
+    #fff 0%, #fff 20%,
+    #000 20%, #000 40%,
+    #fff 40%, #fff 60%,
+    #000 60%, #000 80%,
+    #fff 80%, #fff 100%
+    );
+}
+
+barcode.upc-a upc-digit {
+  width: (7/95) * $width;
+  height: 95%;
+  margin-bottom: 0.05 * $height;
+}
+
+barcode.upc-a upc-reset:first-of-type,
+barcode.upc-a upc-reset:last-of-type {
+  width: (3/95) * $width;
+  background: linear-gradient(
+    to right,
+    #000 0%, #000 33.333%,
+    #fff 33.333%, #fff 66.667%,
+    #000 66.667%, #000 100%
+    );
+}
+
+barcode.upc-a upc-digit:first-of-type,
+barcode.upc-a upc-digit:last-of-type {
+  height: 100%;
+  margin: 0;
+}
+
+@for $i from 0 through 9 {
+  barcode.upc-a upc-digit[data-val="#{$i}"] {
+    &:nth-of-type(-n + 6) {
+      @include upc-pattern($i,1);
+    }
+    &:nth-of-type(n + 7) {
+      @include upc-pattern($i,2);
+    }
+  }
+}
+
+barcode.upc-a upc-digit::after {
+  position: absolute;
+  content: attr(data-val);
+  font-family: mono;
+  font-size: 0.1 * $height;
+  bottom: -0.125 * $height;
+  margin-left: 0.02 * $width;
+}
+
+barcode.upc-a upc-digit:first-of-type::after {
+  bottom: 0;
+  left: -0.1 * $width;
+}
+barcode.upc-a upc-digit:last-of-type::after{
+  bottom: 0;
+  right: -0.085 * $width;
+}

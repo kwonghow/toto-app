@@ -1,4 +1,38 @@
 .ticket {
-  border: 1px solid #f00;
-  font-family: 'Source Code Pro';
+  box-shadow: 0 2px 6px #bbb;
+  font-family: 'Nova Mono';
+  padding: 3rem;
+  text-transform: uppercase;
+
+  &__bet-type {
+    font-size: 0.9rem;
+  }
+
+  &__meta {
+    padding-bottom: 0.5rem;
+    padding-left: 3rem;
+    padding-right: 3rem;
+    padding-top: 1rem;
+    text-align: left;
+  }
+
+  &__price {
+    font-size: 1.1rem;
+    font-weight: 600;
+    margin-bottom: 0;
+  }
+
+  .form-group {
+    &:not(:last-child) {
+      margin-right: 1%;
+    }
+  }
+
+  .form-control {
+    border: 0;
+    box-shadow: none;
+    font-size: 1.5rem;
+    font-weight: 600;
+    text-align: center;
+  }
 }
