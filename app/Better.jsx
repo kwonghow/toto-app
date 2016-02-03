@@ -37,12 +37,6 @@ class Better extends Component {
 
     const { chosenNumbers } = this.state;
 
-    for (let i = 0; i < 7; i++) {
-      if (Number(chosenNumbers[i]) === 0) {
-        return false;
-      }
-    }
-
     if (this.props.onSubmit) {
       this.props.onSubmit(chosenNumbers);
     }
@@ -54,6 +48,18 @@ class Better extends Component {
     const result = getRandomIntSet(7, 1, 49);
 
     this.setState({ chosenNumbers: result});
+  }
+
+  isAllFilled() {
+    const { chosenNumbers } = this.state;
+
+    for (let i = 0; i < 7; i++) {
+      if (Number(chosenNumbers[i]) === 0) {
+        return false;
+      }
+    }
+
+    return true;
   }
 
   render() {
@@ -87,7 +93,7 @@ class Better extends Component {
             <button className="btn btn-default btn-block" onClick={this.handleQuickPick}>Quick Pick</button>
           </div>
           <div className="col-sm-2">
-            <button className="btn btn-primary btn-block" onClick={this.handleDraw}>Draw</button>
+            <button className="btn btn-primary btn-block" onClick={this.handleDraw} disabled={!this.isAllFilled()}>Draw</button>
           </div>
         </div>
       </form>
