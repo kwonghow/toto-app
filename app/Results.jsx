@@ -1,4 +1,16 @@
+import findIndex from 'lodash/array/findIndex';
 import React, { Component, PropTypes } from 'react';
+
+/**
+ * Checks if a given number is part of chosen numbers.
+ *
+ * @param  {Array} chosenNumbers
+ * @param  {Number} result
+ * @return {Boolean}
+ */
+function isChosen(chosenNumbers, result) {
+  return findIndex(chosenNumbers, (chosenNumber) => chosenNumber === result) !== -1;
+}
 
 class Results extends Component {
   static propTypes = {
@@ -10,11 +22,12 @@ class Results extends Component {
   };
 
   renderWinningNumbers() {
-    const { winningNumbers } = this.props;
+    const { chosenNumbers, winningNumbers } = this.props;
     let result = [];
 
     for (let i = 0; i < 6; i++) {
-      result = result.concat(<td key={i}>{winningNumbers[i]}</td>);
+      const className = isChosen(chosenNumbers, winningNumbers[i]) ? 'chosen' : '';
+      result = result.concat(<td key={i} className={className}>{winningNumbers[i]}</td>);
     }
 
     return result;
@@ -51,7 +64,7 @@ class Results extends Component {
             </thead>
             <tbody>
               <tr>
-                <td>{additionalNumber}</td>
+                <td className={isChosen(chosenNumbers, additionalNumber) ? 'chosen' : ''}>{additionalNumber}</td>
               </tr>
             </tbody>
           </table>

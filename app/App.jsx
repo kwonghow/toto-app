@@ -98,6 +98,7 @@ class App extends Component {
 
     this.setState({
       additionalNumber,
+      chosenNumbers,
       amountEarned: this.state.amountEarned + prizeAmount,
       amountSpent: this.state.amountSpent + 7,
       prizeAmount,
