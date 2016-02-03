@@ -35,6 +35,7 @@
     "html-webpack-plugin": "^1.6.1",
     "imports-loader": "^0.6.5",
     "jquery": "^2.2.0",
+    "lodash": "^4.2.0",
     "node-sass": "^3.4.2",
     "react": "^0.14.3",
     "react-dom": "^0.14.3",
