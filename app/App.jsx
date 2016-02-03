@@ -100,6 +100,7 @@ class App extends Component {
       additionalNumber,
       amountEarned: this.state.amountEarned + prizeAmount,
       amountSpent: this.state.amountSpent + 7,
+      prizeAmount,
       prizeGroup,
       winningNumbers,
     });
@@ -111,6 +112,7 @@ class App extends Component {
       amountEarned,
       amountSpent,
       chosenNumbers,
+      prizeAmount,
       prizeGroup,
       winningNumbers
     } = this.state;
@@ -124,6 +126,7 @@ class App extends Component {
           additionalNumber={additionalNumber}
           chosenNumbers={chosenNumbers}
           winningNumbers={winningNumbers}
+          prizeAmount={prizeAmount}
           prizeGroup={prizeGroup} />
       </div>
     );
