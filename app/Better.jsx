@@ -125,6 +125,7 @@ class Better extends Component {
       <form className="form-inline better">
         <div className="row">
           <article className="col-sm-offset-3 col-sm-6 ticket">
+            <p className="ticket__specimen-text">Specimen</p>
             <figure className="ticket__logo" />
             <h2 className="ticket__bet-type">System 7</h2>
             {this.renderInputs()}
@@ -205,6 +206,7 @@ class Better extends Component {
               <upc-digit data-val="2"></upc-digit>
               <upc-reset></upc-reset>
             </barcode>
+            <p className="ticket__specimen-text">Specimen</p>
           </article>
         </div>
         <div className="better__buttons row">

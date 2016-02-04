@@ -29,11 +29,12 @@ $upc_patterns: (
 }
 
 barcode.upc-a {
-  display: block;
-  height: $height;
   background: none;
   border: none;
+  display: block;
   font-size: 0;
+  height: $height;
+  margin-bottom: 2vh;
 }
 
 barcode.upc-a * {

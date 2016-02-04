@@ -53,6 +53,10 @@
     margin-bottom: 0;
   }
 
+  &__specimen-text {
+    color: #999;
+  }
+
   .form-group {
     display: inline-block;
     &:not(:last-child) {
