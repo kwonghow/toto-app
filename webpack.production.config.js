@@ -43,7 +43,28 @@ module.exports = {
     })
   ],
   module: {
-    loaders: [      // Transpile other JS/JSX files back to ES5
+    loaders: [
+    // Convert SCSS into CSS with autoprefixer
+    {
+      test: /\.scss$/,
+      loaders: [
+        'style',
+        'css',
+        'autoprefixer?browsers=last 2 versions',
+        'resolve-url',
+        'sass?sourceMap&outputStyle=expanded'
+      ]
+    },
+    // Font/svg loaders
+    {
+      test: /\.woff(2)?(\?v=\d+\.\d+\.\d+)?$/,
+      loader: 'url?limit=10000&minetype=application/font-woff'
+    },
+    {
+      test: /\.(ttf|eot|svg|png)(\?v=\d+\.\d+\.\d+)?$/,
+      loader: 'file'
+    },
+    // Transpile other JS/JSX files back to ES5
     {
       test: /\.jsx?$/,
       exclude: /(node_modules|bower_components|__tests__)/,
