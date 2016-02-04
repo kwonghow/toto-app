@@ -125,6 +125,7 @@ class Better extends Component {
       <form className="form-inline better">
         <div className="row">
           <article className="col-sm-offset-3 col-sm-6 ticket">
+            <figure className="ticket__logo" />
             <h2 className="ticket__bet-type">System 7</h2>
             {this.renderInputs()}
             <aside className="ticket__meta">
@@ -132,13 +133,11 @@ class Better extends Component {
               <div className="row">
                 <div className="col-xs-7">
                   Draw: Fri 19/02/16<br />
-                  &nbsp;<br />
                   {getDateTime()}<br />
                   209-18659073-234408
                 </div>
                 <div className="col-xs-5 text-right">
-                  0002/14<br />
-                  &nbsp;<br />
+                  3035/16<br />
                   00888802-01<br />
                   02-2624
                 </div>
