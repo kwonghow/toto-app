@@ -128,6 +128,20 @@ class App extends Component {
           winningNumbers={winningNumbers}
           prizeAmount={prizeAmount}
           prizeGroup={prizeGroup} />
+        <aside className="col-xs-12 text-center">
+          <div className="a2a_kit a2a_kit_size_32 a2a_default_style" style={{display: 'inline-block'}}>
+            <a className="a2a_dd" href="https://www.addtoany.com/share" />
+            <a className="a2a_button_facebook" />
+            <a className="a2a_button_twitter" />
+            <a className="a2a_button_google_plus" />
+          </div>
+        </aside>
+        <footer className="footer">
+          <p>
+            Built in React by <a href="https://sg.linkedin.com/in/kwong-how-ong-85131422" target="_blank">Kwong How</a><br />
+            Last updated on 4 February 2016.
+          </p>
+        </footer>
       </div>
     );
   }
