@@ -18,7 +18,7 @@ function getDateTime() {
 
   const amPm = hour >= 12 ? 'pm' : 'am';
 
-  if (hour >= 12) {
+  if (hour > 12) {
     hour -= 12;
   }
 
