@@ -1,7 +1,12 @@
 body {
+  font-size: 1rem;
   margin-top: 5vh;
 }
 
 html {
-  font-size: 100%;
+  font-size: 70%;
+
+  @media (min-width: 768px) {
+    font-size: 100%;
+  }
 }

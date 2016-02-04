@@ -209,10 +209,10 @@ class Better extends Component {
           </article>
         </div>
         <div className="better__buttons row">
-          <div className="col-sm-2 col-sm-offset-4">
+          <div className="col-xs-6 col-sm-2 col-sm-offset-4">
             <button className="btn btn-default btn-block" onClick={this.handleQuickPick}>Quick Pick</button>
           </div>
-          <div className="col-sm-2">
+          <div className="col-xs-6 col-sm-2">
             <button className="btn btn-primary btn-block" onClick={this.handleDraw} disabled={!this.isAllFilled()}>Draw</button>
           </div>
         </div>
