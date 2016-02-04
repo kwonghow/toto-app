@@ -1,7 +1,7 @@
 import React, { Component, PropTypes } from 'react';
 
 import config from 'config';
-import { getRandomIntSet } from 'helpers/NumberHelper';
+import { getRandomIntSet, isChosen } from 'helpers/NumberHelper';
 
 /**
  * Returns a string of the current date time.
@@ -66,6 +66,15 @@ class Better extends Component {
   handleChange(event) {
     const { chosenNumbers } = this.state;
     const { name, value } = event.target;
+    const numericValue = Number(value);
+
+    if (numericValue < config.default.totoRange.min || numericValue > config.default.totoRange.max) {
+      return false;
+    }
+
+    if (numericValue > 10 && isChosen(chosenNumbers, numericValue)) {
+      return false;
+    }
 
     chosenNumbers[name] = Number(value);
 
@@ -84,8 +93,6 @@ class Better extends Component {
 
   handleQuickPick(e) {
     e.preventDefault();
-
-    console.log(config);
 
     const result = getRandomIntSet(7, config.default.totoRange.min, config.default.totoRange.max);
 
