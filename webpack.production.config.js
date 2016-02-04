@@ -19,7 +19,11 @@ module.exports = {
     new HtmlWebpackPlugin({
       template: 'app/index.tpl.html',
       inject: 'body',
-      filename: 'index.html'
+      filename: 'index.html',
+      minify: {
+        collapseWhitespace: true,
+        minifyJS: true
+      },
     }),
     new ExtractTextPlugin('[name]-[hash].min.css'),
     new webpack.optimize.UglifyJsPlugin({
@@ -33,7 +37,7 @@ module.exports = {
       modules: false
     }),
     new webpack.DefinePlugin({
-      'process.env.NODE_ENV': JSON.stringify(process.env.NODE_ENV)
+      'process.env.NODE_ENV': JSON.stringify('production')
     })
   ],
   module: {
@@ -55,5 +59,10 @@ module.exports = {
   },
   postcss: [
     require('autoprefixer')
-  ]
+  ],
+  resolve: {
+    // Resolve .js and .jsx files!
+    extensions: ['', '.js', '.jsx'],
+    root: srcPath
+  }
 };
