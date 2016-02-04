@@ -138,7 +138,7 @@ class App extends Component {
         </aside>
         <footer className="footer">
           <p>
-            Built in React by <a href="https://sg.linkedin.com/in/kwong-how-ong-85131422" target="_blank">Kwong How</a><br />
+            Built in React by <a href="https://sg.linkedin.com/in/kwonghow" target="_blank">Kwong How</a><br />
             Last updated on 4 February 2016
           </p>
         </footer>
