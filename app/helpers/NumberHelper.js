@@ -41,6 +41,6 @@ export function getRandomIntSet(count, min, max) {
  * @param  {Number} result
  * @return {Boolean}
  */
-function isChosen(chosenNumbers, result) {
+export function isChosen(chosenNumbers, result) {
   return findIndex(chosenNumbers, (chosenNumber) => chosenNumber === result) !== -1;
 }
