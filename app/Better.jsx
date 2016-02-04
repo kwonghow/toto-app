@@ -1,5 +1,6 @@
 import React, { Component, PropTypes } from 'react';
 
+import config from 'config';
 import { getRandomIntSet } from 'helpers/NumberHelper';
 
 /**
@@ -84,7 +85,9 @@ class Better extends Component {
   handleQuickPick(e) {
     e.preventDefault();
 
-    const result = getRandomIntSet(7, 1, 49);
+    console.log(config);
+
+    const result = getRandomIntSet(7, config.default.totoRange.min, config.default.totoRange.max);
 
     this.setState({ chosenNumbers: result});
   }
@@ -109,7 +112,7 @@ class Better extends Component {
     for (let i = 0; i < 7; i++) {
       const style = { border: Number(chosenNumbers[i]) === 0 ? '1px solid #337ab7' : 'none' };
       results = results.concat(
-        <div className="form-group">
+        <div className="form-group" key={`bet-number-${i}`}>
           <input className="form-control" name={i} style={style} type="text" value={chosenNumbers[i]} onChange={this.handleChange} />
         </div>
       );

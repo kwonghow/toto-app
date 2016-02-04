@@ -33,3 +33,14 @@ export function getRandomIntSet(count, min, max) {
 
   return results.sort((a, b) => a - b);
 }
+
+/**
+ * Checks if a given number is part of chosen numbers.
+ *
+ * @param  {Array} chosenNumbers
+ * @param  {Number} result
+ * @return {Boolean}
+ */
+function isChosen(chosenNumbers, result) {
+  return findIndex(chosenNumbers, (chosenNumber) => chosenNumber === result) !== -1;
+}

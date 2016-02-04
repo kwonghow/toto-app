@@ -1,16 +1,6 @@
-import findIndex from 'lodash/array/findIndex';
 import React, { Component, PropTypes } from 'react';
 
-/**
- * Checks if a given number is part of chosen numbers.
- *
- * @param  {Array} chosenNumbers
- * @param  {Number} result
- * @return {Boolean}
- */
-function isChosen(chosenNumbers, result) {
-  return findIndex(chosenNumbers, (chosenNumber) => chosenNumber === result) !== -1;
-}
+import { isChosen } from 'helpers/NumberHelper';
 
 class Results extends Component {
   static propTypes = {
