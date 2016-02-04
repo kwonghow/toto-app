@@ -6,6 +6,8 @@ var HtmlWebpackPlugin = require('html-webpack-plugin');
 var ExtractTextPlugin = require('extract-text-webpack-plugin');
 var StatsPlugin = require('stats-webpack-plugin');
 
+var srcPath = path.resolve(__dirname, 'app');
+
 module.exports = {
   entry: [
     path.join(__dirname, 'app/main.js')
