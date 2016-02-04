@@ -10,6 +10,7 @@ var srcPath = path.resolve(__dirname, 'app');
 
 module.exports = {
   entry: [
+    'bootstrap-loader',
     path.join(__dirname, 'app/main.js')
   ],
   output: {
@@ -40,6 +41,10 @@ module.exports = {
     }),
     new webpack.DefinePlugin({
       'process.env.NODE_ENV': JSON.stringify('production')
+    }),
+    new webpack.ProvidePlugin({
+      '$': 'jquery',
+      'jQuery': 'jquery'
     })
   ],
   module: {
