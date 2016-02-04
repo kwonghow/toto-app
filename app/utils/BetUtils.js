@@ -1,3 +1,6 @@
+import findIndex from 'lodash/array/findIndex';
+import { getRandomInt, getRandomIntSet } from 'helpers/NumberHelper';
+
 /**
  * Evaluates the prize amount and prize group based on chosen numbers and results.
  *
