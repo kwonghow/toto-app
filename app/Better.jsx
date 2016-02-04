@@ -101,6 +101,23 @@ class Better extends Component {
     return true;
   }
 
+  renderInputs() {
+    const { chosenNumbers } = this.state;
+
+    let results = [];
+
+    for (let i = 0; i < 7; i++) {
+      const style = { border: Number(chosenNumbers[i]) === 0 ? '1px solid #337ab7' : 'none' };
+      results = results.concat(
+        <div className="form-group">
+          <input className="form-control" name={i} style={style} type="text" value={chosenNumbers[i]} onChange={this.handleChange} />
+        </div>
+      );
+    }
+
+    return results;
+  }
+
   render() {
     const { chosenNumbers } = this.state;
 
@@ -109,27 +126,7 @@ class Better extends Component {
         <div className="row">
           <article className="col-sm-offset-3 col-sm-6 ticket">
             <h2 className="ticket__bet-type">System 7</h2>
-            <div className="form-group">
-              <input className="form-control" name="0" type="text" value={chosenNumbers[0]} onChange={this.handleChange} />
-            </div>
-            <div className="form-group">
-              <input className="form-control" name="1" type="text" value={chosenNumbers[1]} onChange={this.handleChange} />
-            </div>
-            <div className="form-group">
-              <input className="form-control" name="2" type="text" value={chosenNumbers[2]} onChange={this.handleChange} />
-            </div>
-            <div className="form-group">
-              <input className="form-control" name="3" type="text" value={chosenNumbers[3]} onChange={this.handleChange} />
-            </div>
-            <div className="form-group">
-              <input className="form-control" name="4" type="text" value={chosenNumbers[4]} onChange={this.handleChange} />
-            </div>
-            <div className="form-group">
-              <input className="form-control" name="5" type="text" value={chosenNumbers[5]} onChange={this.handleChange} />
-            </div>
-            <div className="form-group">
-              <input className="form-control" name="6" type="text" value={chosenNumbers[6]} onChange={this.handleChange} />
-            </div>
+            {this.renderInputs()}
             <aside className="ticket__meta">
               <p className="ticket__price">Price:$7.00</p>
               <div className="row">
