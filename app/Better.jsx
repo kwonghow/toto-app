@@ -110,25 +110,25 @@ class Better extends Component {
           <article className="col-sm-offset-3 col-sm-6 ticket">
             <h2 className="ticket__bet-type">System 7</h2>
             <div className="form-group">
-              <input className="form-control" name="0" size="1" type="text" value={chosenNumbers[0]} onChange={this.handleChange} />
+              <input className="form-control" name="0" type="text" value={chosenNumbers[0]} onChange={this.handleChange} />
             </div>
             <div className="form-group">
-              <input className="form-control" name="1" size="1" type="text" value={chosenNumbers[1]} onChange={this.handleChange} />
+              <input className="form-control" name="1" type="text" value={chosenNumbers[1]} onChange={this.handleChange} />
             </div>
             <div className="form-group">
-              <input className="form-control" name="2" size="1" type="text" value={chosenNumbers[2]} onChange={this.handleChange} />
+              <input className="form-control" name="2" type="text" value={chosenNumbers[2]} onChange={this.handleChange} />
             </div>
             <div className="form-group">
-              <input className="form-control" name="3" size="1" type="text" value={chosenNumbers[3]} onChange={this.handleChange} />
+              <input className="form-control" name="3" type="text" value={chosenNumbers[3]} onChange={this.handleChange} />
             </div>
             <div className="form-group">
-              <input className="form-control" name="4" size="1" type="text" value={chosenNumbers[4]} onChange={this.handleChange} />
+              <input className="form-control" name="4" type="text" value={chosenNumbers[4]} onChange={this.handleChange} />
             </div>
             <div className="form-group">
-              <input className="form-control" name="5" size="1" type="text" value={chosenNumbers[5]} onChange={this.handleChange} />
+              <input className="form-control" name="5" type="text" value={chosenNumbers[5]} onChange={this.handleChange} />
             </div>
             <div className="form-group">
-              <input className="form-control" name="6" size="1" type="text" value={chosenNumbers[6]} onChange={this.handleChange} />
+              <input className="form-control" name="6" type="text" value={chosenNumbers[6]} onChange={this.handleChange} />
             </div>
             <aside className="ticket__meta">
               <p className="ticket__price">Price:$7.00</p>
