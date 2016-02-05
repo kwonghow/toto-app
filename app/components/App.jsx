@@ -1,8 +1,9 @@
 import findIndex from 'lodash/array/findIndex';
 import React, { Component } from 'react';
 
+import config from 'config';
 import { getRandomInt, getRandomIntSet } from 'helpers/NumberHelper';
-import { evaluateWinnings, generateDrawResults } from 'utils/BetUtils';
+import { evaluateWinnings, generateDrawResults, getCostPerBet } from 'utils/BetUtils';
 
 import AmountSpent from './AmountSpent';
 import Better from './Better';
@@ -14,23 +15,29 @@ class App extends Component {
 
     this.handleSubmit = this.handleSubmit.bind(this);
 
+    // @TODO: Can become modifiable by player in future
+    const system = 12;
+
     this.state = {
       amountEarned: 0,
       amountSpent: 0,
-      prizePool: 12000000
+      prizePool: config.default.prizePool,
+      system
     };
   }
 
   handleSubmit(chosenNumbers) {
     const { additionalNumber, winningNumbers } = generateDrawResults();
-    const { amountEarned, amountSpent, prizePool } = this.state;
+    const { amountEarned, amountSpent, prizePool, system } = this.state;
     const { prizeAmount, prizeGroup } = evaluateWinnings(chosenNumbers, winningNumbers, additionalNumber, prizePool);
+
+    const costPerBet = getCostPerBet(system);
 
     this.setState({
       additionalNumber,
       chosenNumbers,
       amountEarned: amountEarned + prizeAmount,
-      amountSpent: amountSpent + 7,
+      amountSpent: amountSpent + costPerBet,
       prizeAmount,
       prizeGroup,
       winningNumbers,
@@ -45,12 +52,13 @@ class App extends Component {
       chosenNumbers,
       prizeAmount,
       prizeGroup,
+      system,
       winningNumbers
     } = this.state;
 
     return (
       <div className="container text-center">
-        <Better onSubmit={this.handleSubmit} />
+        <Better onSubmit={this.handleSubmit} system={system} />
         <AmountSpent amountEarned={amountEarned} amountSpent={amountSpent} />
         <Results
           additionalNumber={additionalNumber}

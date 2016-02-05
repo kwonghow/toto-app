@@ -1,6 +1,7 @@
 import React, { Component, PropTypes } from 'react';
 
 import config from 'config';
+import { getCostPerBet } from 'utils/BetUtils';
 import { getRandomIntSet, isChosen } from 'helpers/NumberHelper';
 
 import Barcode from './Barcode';
@@ -58,7 +59,7 @@ class Better extends Component {
 
     const initialState = [];
 
-    for (let i = 0; i < 7; i++) {
+    for (let i = 0; i < this.props.system; i++) {
       initialState[i] = '';
     }
 
@@ -98,15 +99,18 @@ class Better extends Component {
   handleQuickPick(e) {
     e.preventDefault();
 
-    const result = getRandomIntSet(7, config.default.totoRange.min, config.default.totoRange.max);
+    const { system } = this.props;
+
+    const result = getRandomIntSet(system, config.default.totoRange.min, config.default.totoRange.max);
 
     this.setState({ chosenNumbers: result});
   }
 
   isAllFilled() {
     const { chosenNumbers } = this.state;
+    const { system } = this.props;
 
-    for (let i = 0; i < 7; i++) {
+    for (let i = 0; i < system; i++) {
       if (Number(chosenNumbers[i]) === 0) {
         return false;
       }
@@ -117,10 +121,11 @@ class Better extends Component {
 
   renderInputs() {
     const { chosenNumbers } = this.state;
+    const { system } = this.props;
 
     let results = [];
 
-    for (let i = 0; i < 7; i++) {
+    for (let i = 0; i < system; i++) {
       const style = { border: Number(chosenNumbers[i]) === 0 ? '1px solid #337ab7' : 'none' };
       results = results.concat(
         <div className="form-group" key={`bet-number-${i}`}>
@@ -134,6 +139,9 @@ class Better extends Component {
 
   render() {
     const { chosenNumbers } = this.state;
+    const { system } = this.props;
+
+    const price = getCostPerBet(system);
 
     return (
       <form className="form-inline better">
@@ -141,10 +149,10 @@ class Better extends Component {
           <article className="col-sm-offset-3 col-sm-6 ticket">
             <p className="ticket__specimen-text">Specimen</p>
             <figure className="ticket__logo" />
-            <h2 className="ticket__bet-type">System 7</h2>
+            <h2 className="ticket__bet-type">System {system}</h2>
             {this.renderInputs()}
             <aside className="ticket__meta">
-              <p className="ticket__price">Price:$7.00</p>
+              <p className="ticket__price">Price:${price}.00</p>
               <div className="row">
                 <div className="col-xs-7">
                   Draw: Fri 19/02/16<br />

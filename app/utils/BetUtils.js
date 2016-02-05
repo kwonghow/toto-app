@@ -83,3 +83,35 @@ export function generateDrawResults() {
 
   return { additionalNumber, winningNumbers };
 }
+
+/**
+ * Gets the cost per bet.
+ *
+ * @param  {Number} system
+ * @return {Number}
+ */
+export function getCostPerBet(system) {
+  switch (system) {
+
+    case 7:
+      return 7;
+
+    case 8:
+      return 28;
+
+    case 9:
+      return 84;
+
+    case 10:
+      return 210;
+
+    case 11:
+      return 462;
+
+    case 12:
+      return 924;
+
+    default:
+      // Do nothing
+  }
+}
