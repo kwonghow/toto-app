@@ -13,10 +13,10 @@ class App extends Component {
   constructor(props) {
     super(props);
 
+    this.handleChangeBetType = this.handleChangeBetType.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
 
-    // @TODO: Can become modifiable by player in future
-    const system = 12;
+    const system = config.default.systemRange.min;
 
     this.state = {
       amountEarned: 0,
@@ -24,6 +24,10 @@ class App extends Component {
       prizePool: config.default.prizePool,
       system
     };
+  }
+
+  handleChangeBetType(system) {
+    this.setState({ system });
   }
 
   handleSubmit(chosenNumbers) {
@@ -58,7 +62,7 @@ class App extends Component {
 
     return (
       <div className="container text-center">
-        <Better onSubmit={this.handleSubmit} system={system} />
+        <Better onChangeBetType={this.handleChangeBetType} onSubmit={this.handleSubmit} system={system} />
         <AmountSpent amountEarned={amountEarned} amountSpent={amountSpent} />
         <Results
           additionalNumber={additionalNumber}

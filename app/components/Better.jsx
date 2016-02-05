@@ -53,17 +53,17 @@ class Better extends Component {
   constructor(props) {
     super(props);
 
+    this.initializeNumbers(props);
+
     this.handleChange = this.handleChange.bind(this);
     this.handleDraw = this.handleDraw.bind(this);
     this.handleQuickPick = this.handleQuickPick.bind(this);
+  }
 
-    const initialState = [];
-
-    for (let i = 0; i < this.props.system; i++) {
-      initialState[i] = '';
+  componentWillReceiveProps(nextProps) {
+    if (this.props.system !== nextProps.system) {
+      this.initializeNumbers(nextProps);
     }
-
-    this.state = { chosenNumbers: initialState };
   }
 
   handleChange(event) {
@@ -86,6 +86,12 @@ class Better extends Component {
     this.setState({ chosenNumbers });
   }
 
+  handleChangeBetType(system) {
+    if (this.props.onChangeBetType) {
+      this.props.onChangeBetType(system);
+    }
+  }
+
   handleDraw(e) {
     e.preventDefault();
 
@@ -106,6 +112,18 @@ class Better extends Component {
     this.setState({ chosenNumbers: result});
   }
 
+  initializeNumbers(props) {
+    const { system } = props;
+
+    const initialState = [];
+
+    for (let i = 0; i < system; i++) {
+      initialState[i] = '';
+    }
+
+    this.state = { chosenNumbers: initialState };
+  }
+
   isAllFilled() {
     const { chosenNumbers } = this.state;
     const { system } = this.props;
@@ -117,6 +135,19 @@ class Better extends Component {
     }
 
     return true;
+  }
+
+  renderBetTypeChoices() {
+    const { system } = this.props;
+
+    let results = [];
+
+    for (let i = config.default.systemRange.min; i <= config.default.systemRange.max; i++) {
+      results = results.concat(<a key={`change-system-${i}`} role="link" onClick={this.handleChangeBetType.bind(this, i)}>{system === i ? <strong>{i}</strong> : i}</a>);
+      results = results.concat(<span key={`spacing-${i}`}>&nbsp;</span>);
+    }
+
+    return results;
   }
 
   renderInputs() {
@@ -145,6 +176,10 @@ class Better extends Component {
 
     return (
       <form className="form-inline better">
+        <p className="text-center">
+          System&nbsp;
+          {this.renderBetTypeChoices()}
+        </p>
         <div className="row">
           <article className="col-sm-offset-3 col-sm-6 ticket">
             <p className="ticket__specimen-text">Specimen</p>
