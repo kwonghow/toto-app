@@ -3,6 +3,8 @@ import React, { Component, PropTypes } from 'react';
 import config from 'config';
 import { getRandomIntSet, isChosen } from 'helpers/NumberHelper';
 
+import Barcode from './Barcode';
+
 /**
  * Returns a string of the current date time.
  *
@@ -68,10 +70,12 @@ class Better extends Component {
     const { name, value } = event.target;
     const numericValue = Number(value);
 
+    // Prevent entering number out of range
     if (numericValue < config.default.totoRange.min || numericValue > config.default.totoRange.max) {
       return false;
     }
 
+    // Prevent entering duplicate numbers (some cases)
     if (numericValue > 10 && isChosen(chosenNumbers, numericValue)) {
       return false;
     }
@@ -154,68 +158,7 @@ class Better extends Component {
                 </div>
               </div>
             </aside>
-            <barcode className="upc-a">
-              <upc-reset></upc-reset>
-              <upc-digit data-val="0"></upc-digit>
-              <upc-digit data-val="2"></upc-digit>
-              <upc-digit data-val="2"></upc-digit>
-              <upc-digit data-val="0"></upc-digit>
-              <upc-digit data-val="0"></upc-digit>
-              <upc-digit data-val="0"></upc-digit>
-              <upc-reset></upc-reset>
-              <upc-digit data-val="1"></upc-digit>
-              <upc-digit data-val="2"></upc-digit>
-              <upc-digit data-val="5"></upc-digit>
-              <upc-digit data-val="0"></upc-digit>
-              <upc-digit data-val="3"></upc-digit>
-              <upc-digit data-val="3"></upc-digit>
-              <upc-reset></upc-reset>
-              <upc-digit data-val="0"></upc-digit>
-              <upc-digit data-val="2"></upc-digit>
-              <upc-digit data-val="2"></upc-digit>
-              <upc-digit data-val="0"></upc-digit>
-              <upc-digit data-val="0"></upc-digit>
-              <upc-digit data-val="0"></upc-digit>
-              <upc-reset></upc-reset>
-              <upc-digit data-val="1"></upc-digit>
-              <upc-digit data-val="2"></upc-digit>
-              <upc-digit data-val="5"></upc-digit>
-              <upc-digit data-val="0"></upc-digit>
-              <upc-digit data-val="3"></upc-digit>
-              <upc-digit data-val="3"></upc-digit>
-              <upc-reset></upc-reset>
-              <upc-digit data-val="0"></upc-digit>
-              <upc-digit data-val="2"></upc-digit>
-              <upc-digit data-val="2"></upc-digit>
-              <upc-digit data-val="0"></upc-digit>
-              <upc-digit data-val="0"></upc-digit>
-              <upc-digit data-val="0"></upc-digit>
-              <upc-reset></upc-reset>
-              <upc-digit data-val="1"></upc-digit>
-              <upc-digit data-val="2"></upc-digit>
-              <upc-digit data-val="5"></upc-digit>
-              <upc-digit data-val="0"></upc-digit>
-              <upc-digit data-val="3"></upc-digit>
-              <upc-digit data-val="3"></upc-digit>
-              <upc-reset></upc-reset>
-              <upc-digit data-val="0"></upc-digit>
-              <upc-digit data-val="2"></upc-digit>
-              <upc-digit data-val="2"></upc-digit>
-              <upc-digit data-val="0"></upc-digit>
-              <upc-digit data-val="0"></upc-digit>
-              <upc-digit data-val="0"></upc-digit>
-              <upc-reset></upc-reset>
-              <upc-digit data-val="1"></upc-digit>
-              <upc-digit data-val="2"></upc-digit>
-              <upc-digit data-val="5"></upc-digit>
-              <upc-digit data-val="0"></upc-digit>
-              <upc-digit data-val="3"></upc-digit>
-              <upc-digit data-val="3"></upc-digit>
-              <upc-reset></upc-reset>
-              <upc-digit data-val="0"></upc-digit>
-              <upc-digit data-val="2"></upc-digit>
-              <upc-reset></upc-reset>
-            </barcode>
+            <Barcode />
             <p className="ticket__specimen-text">Specimen</p>
           </article>
         </div>
