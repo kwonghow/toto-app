@@ -81,7 +81,8 @@ class App extends Component {
         <footer className="footer">
           <p>
             Built in React by <a href="https://sg.linkedin.com/in/kwonghow" target="_blank">Kwong How</a><br />
-            Last updated on 5 February 2016
+            Last updated on 5 February 2016<br />
+            Issues? Let me know via <a href="https://github.com/kwonghow/toto-app/issues" target="_blank">Github</a>
           </p>
         </footer>
       </div>
