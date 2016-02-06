@@ -143,9 +143,19 @@ class Better extends Component {
     let results = [];
 
     for (let i = config.default.systemRange.min; i <= config.default.systemRange.max; i++) {
-      results = results.concat(<a key={`change-system-${i}`} role="link" onClick={this.handleChangeBetType.bind(this, i)}>{system === i ? <strong>{i}</strong> : i}</a>);
-      results = results.concat(<span key={`spacing-${i}`}>&nbsp;</span>);
+      results = results.concat(
+        <label
+          className={'btn btn-default' + (system === i ? ' active' : '')}
+          key={`change-bet-type-${i}`}
+          onClick={this.handleChangeBetType.bind(this, i)}
+        >
+          <input name={i} type="radio" checked={system === i} onChange={this.handleChangeBetType.bind(this, i)} />
+          {i}
+        </label>
+      );
     }
+
+    results = <div className="btn-group" data-toggle="buttons">{results}</div>;
 
     return results;
   }
@@ -176,10 +186,10 @@ class Better extends Component {
 
     return (
       <form className="form-inline better">
-        <p className="text-center">
-          System&nbsp;
+        <div className="better__bet-type-chooser">
+          <h2 className="text-center">System</h2>
           {this.renderBetTypeChoices()}
-        </p>
+        </div>
         <div className="row">
           <article className="col-sm-offset-3 col-sm-6 ticket">
             <p className="ticket__specimen-text">Specimen</p>

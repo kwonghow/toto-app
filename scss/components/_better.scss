@@ -1,6 +1,15 @@
 .better {
   margin-bottom: 5vh;
 
+  &__bet-type-chooser {
+    margin-bottom: 3vh;
+
+    h2 {
+      font-size: 1rem;
+      margin-top: 0;
+    }
+  }
+
   &__buttons {
     margin-top: 5vh;
 
