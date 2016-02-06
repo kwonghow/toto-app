@@ -5,6 +5,7 @@ import { getCostPerBet } from 'utils/BetUtils';
 import { getRandomIntSet, isChosen } from 'helpers/NumberHelper';
 
 import Barcode from './Barcode';
+import BetTypeChooser from './BetTypeChooser';
 
 /**
  * Returns a string of the current date time.
@@ -47,6 +48,8 @@ function getDateTime() {
 
 class Better extends Component {
   static propTypes = {
+    system: PropTypes.number,
+    onChangeBetType: PropTypes.func,
     onSubmit: PropTypes.func
   };
 
@@ -84,12 +87,6 @@ class Better extends Component {
     chosenNumbers[name] = Number(value);
 
     this.setState({ chosenNumbers });
-  }
-
-  handleChangeBetType(system) {
-    if (this.props.onChangeBetType) {
-      this.props.onChangeBetType(system);
-    }
   }
 
   handleDraw(e) {
@@ -137,29 +134,6 @@ class Better extends Component {
     return true;
   }
 
-  renderBetTypeChoices() {
-    const { system } = this.props;
-
-    let results = [];
-
-    for (let i = config.default.systemRange.min; i <= config.default.systemRange.max; i++) {
-      results = results.concat(
-        <label
-          className={'btn btn-default' + (system === i ? ' active' : '')}
-          key={`change-bet-type-${i}`}
-          onClick={this.handleChangeBetType.bind(this, i)}
-        >
-          <input name={i} type="radio" checked={system === i} onChange={this.handleChangeBetType.bind(this, i)} />
-          {i}
-        </label>
-      );
-    }
-
-    results = <div className="btn-group" data-toggle="buttons">{results}</div>;
-
-    return results;
-  }
-
   renderInputs() {
     const { chosenNumbers } = this.state;
     const { system } = this.props;
@@ -180,16 +154,13 @@ class Better extends Component {
 
   render() {
     const { chosenNumbers } = this.state;
-    const { system } = this.props;
+    const { onChangeBetType, system } = this.props;
 
     const price = getCostPerBet(system);
 
     return (
       <form className="form-inline better">
-        <div className="better__bet-type-chooser">
-          <h2 className="text-center">System</h2>
-          {this.renderBetTypeChoices()}
-        </div>
+        <BetTypeChooser chosenBetType={system} onChange={onChangeBetType} />
         <div className="row">
           <article className="col-sm-offset-3 col-sm-6 ticket">
             <p className="ticket__specimen-text">Specimen</p>
