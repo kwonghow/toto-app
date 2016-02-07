@@ -21,7 +21,6 @@ class App extends Component {
     this.state = {
       amountEarned: 0,
       amountSpent: 0,
-      prizePool: config.default.prizePool,
       system
     };
   }
@@ -32,8 +31,8 @@ class App extends Component {
 
   handleSubmit(chosenNumbers) {
     const { additionalNumber, winningNumbers } = generateDrawResults();
-    const { amountEarned, amountSpent, prizePool, system } = this.state;
-    const prizeAmount = evaluateWinnings(chosenNumbers, winningNumbers, additionalNumber, system, prizePool);
+    const { amountEarned, amountSpent, system } = this.state;
+    const prizeAmount = evaluateWinnings(chosenNumbers, winningNumbers, additionalNumber, system);
 
     const costPerBet = getCostPerBet(system);
 

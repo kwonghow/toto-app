@@ -41,15 +41,14 @@ function evaluateMatches(chosenNumbers, winningNumbers, additionalNumber) {
  * @param  {Number}  matchCount
  * @param  {Boolean} isAdditionalNumberMatched
  * @param  {Number}  system
- * @param  {Number}  prizePool
  * @return {Number}
  */
-function evaluatePrizeAmount(matchCount, isAdditionalNumberMatched, system, prizePool) {
+function evaluatePrizeAmount(matchCount, isAdditionalNumberMatched, system) {
   if (matchCount < 3) {
     return 0;
   }
 
-  const { winningShares } = config.default;
+  const { prizePool, winningShares } = config.default;
 
   const pot = {
     1: 0.38 * prizePool,
@@ -215,16 +214,15 @@ function evaluatePrizeAmount(matchCount, isAdditionalNumberMatched, system, priz
  * @param  {Array} winningNumbers
  * @param  {Number} additionalNumber
  * @param  {Number} system
- * @param  {Number} prizePool
  * @return {Number}
  */
-export function evaluateWinnings(chosenNumbers, winningNumbers, additionalNumber, system, prizePool) {
+export function evaluateWinnings(chosenNumbers, winningNumbers, additionalNumber, system) {
   const {
     isAdditionalNumberMatched,
     matchCount
   } = evaluateMatches(chosenNumbers, winningNumbers, additionalNumber);
 
-  return evaluatePrizeAmount(matchCount, isAdditionalNumberMatched, system, prizePool);
+  return evaluatePrizeAmount(matchCount, isAdditionalNumberMatched, system);
 }
 
 /**
