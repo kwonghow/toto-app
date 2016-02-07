@@ -33,7 +33,7 @@ class App extends Component {
   handleSubmit(chosenNumbers) {
     const { additionalNumber, winningNumbers } = generateDrawResults();
     const { amountEarned, amountSpent, prizePool, system } = this.state;
-    const { prizeAmount, prizeGroup } = evaluateWinnings(chosenNumbers, winningNumbers, additionalNumber, prizePool);
+    const prizeAmount = evaluateWinnings(chosenNumbers, winningNumbers, additionalNumber, system, prizePool);
 
     const costPerBet = getCostPerBet(system);
 
@@ -43,7 +43,6 @@ class App extends Component {
       amountEarned: amountEarned + prizeAmount,
       amountSpent: amountSpent + costPerBet,
       prizeAmount,
-      prizeGroup,
       winningNumbers,
     });
   }
@@ -68,8 +67,7 @@ class App extends Component {
           additionalNumber={additionalNumber}
           chosenNumbers={chosenNumbers}
           winningNumbers={winningNumbers}
-          prizeAmount={prizeAmount}
-          prizeGroup={prizeGroup} />
+          prizeAmount={prizeAmount} />
         <aside className="col-xs-12 text-center">
           <div className="a2a_kit a2a_kit_size_32 a2a_default_style" style={{display: 'inline-block'}}>
             <a className="a2a_dd" href="https://www.addtoany.com/share" />
@@ -81,7 +79,13 @@ class App extends Component {
         <footer className="footer">
           <p>
             Built in React by <a href="https://sg.linkedin.com/in/kwonghow" target="_blank">Kwong How</a><br />
-            Last updated on 6 February 2016<br />
+            Last updated on 7 February 2016
+          </p>
+          <p>
+            Prize pool, no. of winning shares for Groups 1, 2, 3 and 4 based<br />
+            on <a href="http://www.singaporepools.com.sg/en/toto/sr/pages/result.aspx?sppl=RHJhd051bWJlcj0zMDM1" target="_blank">2015 Toto Hong Bao Draw statistics</a>
+          </p>
+          <p>
             Issues? Let me know via <a href="https://github.com/kwonghow/toto-app/issues" target="_blank">Github</a>
           </p>
         </footer>

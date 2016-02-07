@@ -7,7 +7,6 @@ class Results extends Component {
     additionalNumber: PropTypes.number,
     chosenNumbers: PropTypes.array,
     prizeAmount: PropTypes.number,
-    prizeGroup: PropTypes.string,
     winningNumbers: PropTypes.array
   };
 
@@ -24,7 +23,7 @@ class Results extends Component {
   }
 
   render() {
-    const { additionalNumber, chosenNumbers, prizeAmount, prizeGroup, winningNumbers } = this.props;
+    const { additionalNumber, chosenNumbers, prizeAmount, winningNumbers } = this.props;
 
     if (!additionalNumber && !winningNumbers) {
       return <span />;
@@ -58,7 +57,7 @@ class Results extends Component {
               </tr>
             </tbody>
           </table>
-          <p><strong>Prize Group:</strong> { prizeGroup.length ? `${prizeGroup}. Won $${prizeAmount}!` : 'Better luck next time!'}</p>
+          <p><strong>Prize Amount:</strong> { prizeAmount > 0 ? `Won $${prizeAmount}!` : 'Better luck next time!'}</p>
         </div>
       </div>
     );

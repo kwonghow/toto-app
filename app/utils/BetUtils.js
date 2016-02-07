@@ -1,17 +1,18 @@
 import findIndex from 'lodash/array/findIndex';
+
+import config from 'config';
 import { getRandomInt, getRandomIntSet } from 'helpers/NumberHelper';
 
 /**
- * Evaluates the prize amount and prize group based on chosen numbers and results.
+ * Evaluates the number of matches based on chosen set vs winning set +
+ * additional number.
  *
  * @param  {Array} chosenNumbers
  * @param  {Array} winningNumbers
  * @param  {Number} additionalNumber
- * @param  {Number} prizePool
  * @return {Object}
  */
-export function evaluateWinnings(chosenNumbers, winningNumbers, additionalNumber, prizePool) {
-  const evaluateMatches = (chosenNumbers, winningNumbers, additionalNumber) => {
+function evaluateMatches(chosenNumbers, winningNumbers, additionalNumber) {
     let matchCount = 0;
 
     winningNumbers.map((result) => {
@@ -20,52 +21,204 @@ export function evaluateWinnings(chosenNumbers, winningNumbers, additionalNumber
       }
     });
 
-    const isAdditionalNumberMatched = (findIndex(chosenNumbers, (chosenNumber) => chosenNumber === additionalNumber) !== -1) ? true : false;
+    const isAdditionalNumberMatched =
+      (findIndex(chosenNumbers, (chosenNumber) => chosenNumber === additionalNumber) !== -1) ?
+        true :
+        false;
 
     return { isAdditionalNumberMatched, matchCount };
+}
+
+/**
+ * Evalutes the prize amount based on bet type and prize group.
+ *
+ * @param  {Number}  matchCount
+ * @param  {Boolean} isAdditionalNumberMatched
+ * @param  {Number}  system
+ * @param  {Number}  prizePool
+ * @return {Number}
+ */
+function evaluatePrizeAmount(matchCount, isAdditionalNumberMatched, system, prizePool) {
+  if (matchCount < 3) {
+    return 0;
   }
 
+  const { winningShares } = config.default;
+
+  const pot = {
+    1: 0.38 * prizePool,
+    2: 0.8 * prizePool,
+    3: 0.055 * prizePool,
+    4: 0.03 * prizePool
+  };
+
+  const potPerShare = {
+    1: Math.round(pot[1] / winningShares[1]),
+    2: Math.round(pot[2] / winningShares[2]),
+    3: Math.round(pot[3] / winningShares[3]),
+    4: Math.round(pot[4] / winningShares[4])
+  };
+
+  switch (matchCount) {
+
+    case 3:
+      switch (system) {
+
+        case 7:
+          return isAdditionalNumberMatched ? 85 : 40;
+
+        case 8:
+          return isAdditionalNumberMatched ? 190 : 100;
+
+        case 9:
+          return isAdditionalNumberMatched ? 350 : 200;
+
+        case 10:
+          return isAdditionalNumberMatched ? 575 : 350;
+
+        case 11:
+          return isAdditionalNumberMatched ? 875 : 560;
+
+        case 12:
+          return isAdditionalNumberMatched ? 1260 : 840;
+
+        default:
+          return 0;
+      }
+
+    case 4:
+      switch (system) {
+
+        case 7:
+          return isAdditionalNumberMatched ?
+            2 * potPerShare[4] + 150 :
+            190;
+
+        case 8:
+          return isAdditionalNumberMatched ?
+            3 * potPerShare[4] + 490 :
+            460;
+
+        case 9:
+          return isAdditionalNumberMatched ?
+            4 * potPerShare[4] + 1060 :
+            900;
+
+        case 10:
+          return isAdditionalNumberMatched ?
+            5 * potPerShare[4] + 1900 :
+            1550;
+
+        case 11:
+          return isAdditionalNumberMatched ?
+            6 * potPerShare[4] + 3050 :
+            2450;
+
+        case 12:
+          return isAdditionalNumberMatched ?
+            7 * potPerShare[4] + 4550 :
+            3640;
+
+        default:
+          return 0;
+      }
+
+    case 5:
+      switch (system) {
+
+        case 7:
+          return isAdditionalNumberMatched ?
+            1 * potPerShare[2] + 1 * potPerShare[3] + 5 * potPerShare[4] :
+            2 * potPerShare[3] + 250;
+
+        case 8:
+          return isAdditionalNumberMatched ?
+            1 * potPerShare[2] + 2 * potPerShare[3] + 10 * potPerShare[4] + 500:
+            3 * potPerShare[3] + 850;
+
+        case 9:
+          return isAdditionalNumberMatched ?
+            1 * potPerShare[2] + 3 * potPerShare[3] + 15 * potPerShare[4] + 1600:
+            4 * potPerShare[3] + 1900;
+
+        case 10:
+          return isAdditionalNumberMatched ?
+            1 * potPerShare[2] + 4 * potPerShare[3] + 20 * potPerShare[4] + 3400:
+            5 * potPerShare[3] + 3500;
+
+        case 11:
+          return isAdditionalNumberMatched ?
+            1 * potPerShare[2] + 5 * potPerShare[3] + 25 * potPerShare[4] + 6000:
+            6 * potPerShare[3] + 5750;
+
+        case 12:
+          return isAdditionalNumberMatched ?
+            1 * potPerShare[2] + 6 * potPerShare[3] + 30 * potPerShare[4] + 9500:
+            7 * potPerShare[3] + 8750;
+
+        default:
+          return 0;
+      }
+
+    case 6:
+          switch (system) {
+
+        case 7:
+          return isAdditionalNumberMatched ?
+            1 * potPerShare[1] + 6 * potPerShare[2] :
+            1 * potPerShare[1] + 6 * potPerShare[3];
+
+        case 8:
+          return isAdditionalNumberMatched ?
+            1 * potPerShare[1] + 6 * potPerShare[2] + 6 * potPerShare[3] + 15 * potPerShare[4]:
+            1 * potPerShare[1] + 12 * potPerShare[3] + 750;
+
+        case 9:
+          return isAdditionalNumberMatched ?
+            1 * potPerShare[1] + 6 * potPerShare[2] + 12 * potPerShare[3] + 30 * potPerShare[4] + 1250:
+            1 * potPerShare[1] + 18 * potPerShare[3] + 2450;
+
+        case 10:
+          return isAdditionalNumberMatched ?
+            1 * potPerShare[1] + 6 * potPerShare[2] + 18 * potPerShare[3] + 45 * potPerShare[4] + 3950:
+            1 * potPerShare[1] + 24 * potPerShare[3] + 5300;
+
+        case 11:
+          return isAdditionalNumberMatched ?
+            1 * potPerShare[1] + 6 * potPerShare[2] + 24 * potPerShare[3] + 60 * potPerShare[4] + 8300:
+            1 * potPerShare[1] + 30 * potPerShare[3] + 9500;
+
+        case 12:
+          return isAdditionalNumberMatched ?
+            1 * potPerShare[1] + 6 * potPerShare[2] + 30 * potPerShare[3] + 75 * potPerShare[4] + 14500:
+            1 * potPerShare[1] + 36 * potPerShare[3] + 15250;
+
+        default:
+          return 0;
+      }
+
+    default:
+      // Do nothing
+  }
+}
+
+/**
+ * Evaluates the prize amount based on chosen numbers and results.
+ *
+ * @param  {Array} chosenNumbers
+ * @param  {Array} winningNumbers
+ * @param  {Number} additionalNumber
+ * @param  {Number} system
+ * @param  {Number} prizePool
+ * @return {Number}
+ */
+export function evaluateWinnings(chosenNumbers, winningNumbers, additionalNumber, system, prizePool) {
   const {
     isAdditionalNumberMatched,
     matchCount
   } = evaluateMatches(chosenNumbers, winningNumbers, additionalNumber);
 
-  switch (matchCount) {
-    case 0:
-    case 1:
-    case 2:
-      return {
-        prizeAmount: 0,
-        prizeGroup: ''
-      };
-
-    case 3:
-      return {
-        prizeAmount: isAdditionalNumberMatched ? 25 : 10,
-        prizeGroup: isAdditionalNumberMatched ? 'Group 6' : 'Group 7'
-      };
-
-    case 4:
-      return {
-        prizeAmount: isAdditionalNumberMatched ? 0.03 * prizePool : 50,
-        prizeGroup: isAdditionalNumberMatched ? 'Group 4' : 'Group 5'
-      };
-
-    case 5:
-      return {
-        prizeAmount: isAdditionalNumberMatched ? 0.08 * prizePool : 0.055 * prizePool,
-        prizeGroup: isAdditionalNumberMatched ? 'Group 2' : 'Group 3'
-      };
-
-    case 6:
-      return {
-        prizeAmount: 0.38 * prizePool > 1000000 ? 0.38 * prizePool : 1000000,
-        prizeGroup: 'Group 1 (Jackpot)'
-      };
-
-    default:
-      // Do nothing
-  }
+  return evaluatePrizeAmount(matchCount, isAdditionalNumberMatched, system, prizePool);
 }
 
 /**
