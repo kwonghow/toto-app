@@ -4,14 +4,18 @@ import { isChosen } from 'helpers/NumberHelper';
 
 class Results extends Component {
   static propTypes = {
-    additionalNumber: PropTypes.number,
     chosenNumbers: PropTypes.array,
     prizeAmount: PropTypes.number,
-    winningNumbers: PropTypes.array
+    results: PropTypes.shape({
+      additionalNumber: PropTypes.number,
+      winningNumbers: PropTypes.array
+    })
   };
 
   renderWinningNumbers() {
-    const { chosenNumbers, winningNumbers } = this.props;
+    const { chosenNumbers, results } = this.props;
+    const { winningNumbers } = results;
+
     let result = [];
 
     for (let i = 0; i < 6; i++) {
@@ -23,11 +27,13 @@ class Results extends Component {
   }
 
   render() {
-    const { additionalNumber, chosenNumbers, prizeAmount, winningNumbers } = this.props;
+    const { chosenNumbers, prizeAmount, results } = this.props;
 
-    if (!additionalNumber && !winningNumbers) {
+    if (!results) {
       return <span />;
     }
+
+    const { additionalNumber } = results;
 
     return (
 

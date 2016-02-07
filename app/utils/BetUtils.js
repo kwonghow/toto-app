@@ -231,44 +231,15 @@ export function evaluateWinnings(chosenNumbers, winningNumbers, additionalNumber
  * @return {Object}
  */
 export function generateDrawResults() {
-  let additionalNumber = getRandomInt(1, 49);
-  const winningNumbers = getRandomIntSet(6, 1, 49);
+  const { totoRange, winningNumbersLength } = config.default;
+  const { max, min } = totoRange;
+
+  let additionalNumber = getRandomInt(min, max);
+  const winningNumbers = getRandomIntSet(winningNumbersLength, min, max);
 
   while (findIndex(winningNumbers, (number) => number === additionalNumber) !== -1) {
-    additionalNumber = getRandomInt(1, 49);
+    additionalNumber = getRandomInt(min, max);
   }
 
   return { additionalNumber, winningNumbers };
-}
-
-/**
- * Gets the cost per bet.
- *
- * @param  {Number} system
- * @return {Number}
- */
-export function getCostPerBet(system) {
-  switch (system) {
-
-    case 7:
-      return 7;
-
-    case 8:
-      return 28;
-
-    case 9:
-      return 84;
-
-    case 10:
-      return 210;
-
-    case 11:
-      return 462;
-
-    case 12:
-      return 924;
-
-    default:
-      // Do nothing
-  }
 }

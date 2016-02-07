@@ -1,9 +1,7 @@
-import findIndex from 'lodash/array/findIndex';
 import React, { Component } from 'react';
 
 import config from 'config';
-import { getRandomInt, getRandomIntSet } from 'helpers/NumberHelper';
-import { evaluateWinnings, generateDrawResults, getCostPerBet } from 'utils/BetUtils';
+import { evaluateWinnings, generateDrawResults } from 'utils/BetUtils';
 
 import AmountSpent from './AmountSpent';
 import Better from './Better';
@@ -17,56 +15,64 @@ class App extends Component {
     this.handleSubmit = this.handleSubmit.bind(this);
 
     const system = config.default.systemRange.min;
+    const costPerBet = config.default.costPerBet[system];
 
     this.state = {
       amountEarned: 0,
       amountSpent: 0,
+      costPerBet,
       system
     };
   }
 
   handleChangeBetType(system) {
-    this.setState({ system });
+    const costPerBet = config.default.costPerBet[system];
+
+    this.setState({ costPerBet, system });
   }
 
   handleSubmit(chosenNumbers) {
-    const { additionalNumber, winningNumbers } = generateDrawResults();
-    const { amountEarned, amountSpent, system } = this.state;
+    const { amountEarned, amountSpent, costPerBet, system } = this.state;
+
+    const results = generateDrawResults();
+    const { additionalNumber, winningNumbers } = results;
+
     const prizeAmount = evaluateWinnings(chosenNumbers, winningNumbers, additionalNumber, system);
 
-    const costPerBet = getCostPerBet(system);
-
     this.setState({
-      additionalNumber,
       chosenNumbers,
       amountEarned: amountEarned + prizeAmount,
       amountSpent: amountSpent + costPerBet,
       prizeAmount,
-      winningNumbers,
+      results
     });
   }
 
   render() {
     const {
-      additionalNumber,
       amountEarned,
       amountSpent,
       chosenNumbers,
+      costPerBet,
       prizeAmount,
-      prizeGroup,
+      results,
       system,
-      winningNumbers
     } = this.state;
 
     return (
       <div className="container text-center">
-        <Better onChangeBetType={this.handleChangeBetType} onSubmit={this.handleSubmit} system={system} />
+        <Better
+          costPerBet={costPerBet}
+          onChangeBetType={this.handleChangeBetType}
+          onSubmit={this.handleSubmit}
+          system={system}
+        />
         <AmountSpent amountEarned={amountEarned} amountSpent={amountSpent} />
         <Results
-          additionalNumber={additionalNumber}
           chosenNumbers={chosenNumbers}
-          winningNumbers={winningNumbers}
-          prizeAmount={prizeAmount} />
+          prizeAmount={prizeAmount}
+          results={results}
+        />
         <aside className="col-xs-12 text-center">
           <div className="a2a_kit a2a_kit_size_32 a2a_default_style" style={{display: 'inline-block'}}>
             <a className="a2a_dd" href="https://www.addtoany.com/share" />

@@ -1,7 +1,6 @@
 import React, { Component, PropTypes } from 'react';
 
 import config from 'config';
-import { getCostPerBet } from 'utils/BetUtils';
 import { getRandomIntSet, isChosen } from 'helpers/NumberHelper';
 
 import Barcode from './Barcode';
@@ -48,6 +47,7 @@ function getDateTime() {
 
 class Better extends Component {
   static propTypes = {
+    costPerBet: PropTypes.number,
     system: PropTypes.number,
     onChangeBetType: PropTypes.func,
     onSubmit: PropTypes.func
@@ -153,10 +153,7 @@ class Better extends Component {
   }
 
   render() {
-    const { chosenNumbers } = this.state;
-    const { onChangeBetType, system } = this.props;
-
-    const price = getCostPerBet(system);
+    const { costPerBet, onChangeBetType, system } = this.props;
 
     return (
       <form className="form-inline better">
@@ -168,7 +165,7 @@ class Better extends Component {
             <h2 className="ticket__bet-type">System {system}</h2>
             {this.renderInputs()}
             <aside className="ticket__meta">
-              <p className="ticket__price">Price:${price}.00</p>
+              <p className="ticket__price">Price:${costPerBet}.00</p>
               <div className="row">
                 <div className="col-xs-7">
                   Draw: Fri 19/02/16<br />
