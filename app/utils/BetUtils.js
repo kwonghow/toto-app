@@ -30,7 +30,13 @@ function evaluateMatches(chosenNumbers, winningNumbers, additionalNumber) {
 }
 
 /**
- * Evalutes the prize amount based on bet type and prize group.
+ * Evaluates the prize amount.
+ *
+ * Based on official Prize Structure from Singapore Pools:
+ * http://www.singaporepools.com.sg/en/toto/htp/Pages/ps.aspx
+ *
+ * @TODO: Write helper function to determine number of matching combinations
+ *        instead of hard-coding.
  *
  * @param  {Number}  matchCount
  * @param  {Boolean} isAdditionalNumberMatched
