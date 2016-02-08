@@ -52,7 +52,7 @@ function evaluatePrizeAmount(matchCount, isAdditionalNumberMatched, system) {
 
   const pot = {
     1: 0.38 * prizePool,
-    2: 0.8 * prizePool,
+    2: 0.08 * prizePool,
     3: 0.055 * prizePool,
     4: 0.03 * prizePool
   };
